@@ -12,6 +12,7 @@
 
 # test_methods_can_take_blocks
 
+# just yield
 def func
 	yield("Mark")
 	yield("Micaella")
@@ -24,4 +25,23 @@ def test
 	end
 end
 
-test
+# call with block
+def func1(&block)
+	block.call
+end
+
+def test1
+	func1 {puts "this is a block."}
+end
+
+# call block with arguments
+def func2(&block)
+	block.call(1)
+end
+
+def test2
+	func2 {|i| puts "#{i} is called."}
+end
+
+
+test2
