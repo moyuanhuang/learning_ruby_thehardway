@@ -11,6 +11,19 @@
 	<% flash.each do |name, msg| %>
 		<% content_tag(:div, msg, class: "alert aler-#{name}") %>
 	<% end %>
+	
+	<% if user_signed_in? %>
+		<ul>
+			<li><%= link_to 'Submit link', new_link_path %></li>
+			<li><%= link_to 'Account', edit_user_registration_path %></li>
+			<li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+		</ul>
+	<% else %>
+		<ul>
+			<li><%= link_to 'Sign Up', new_user_registration_path %></li>
+			<li><%= link_to 'Sign In', new_user_session_path %></li>
+		</ul>
+	<% end %>
 
 <%= yield %>
 
