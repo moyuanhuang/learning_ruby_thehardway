@@ -1,14 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><a href="<%= @link.url %>"><%= @link.title %></a><br></h1>
+  <h2><small>Submitted by <%= @link.user.email %></small></h2>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @link.title %>
-</p>
+<div class="btn-group">
+	<%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
+</div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @link.url %>
-</p>
+<% if @link.user == current_user -%>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_link_path(@link), class: "btn btn-default" %>
+    <%= link_to 'Delete', @link, method: :destroy, data:{ confirm: 'Are you sure?' }, class: "btn btn-default" %>
+  </div>
+<% end %>
 
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', links_path %>
+<div class="btn-group pull-right">
+  <%= link_to like_link_path(@link), method: :put, class: "btn btn-default btn-sm" do %>
+  <span class="glyphicon glyphicon-chevron-up"></span>
+  Upvote
+  <%= @link.get_upvotes.size %>
+  <% end %>
+  <%= link_to dislike_link_path(@link), method: :put, class: "btn btn-default btn-sm" do %>
+    <span class="glyphicon glyphicon-chevron-down"></span>
+  Downvote
+  <%= @link.get_downvotes.size %>
+  <% end %>
+</div>
