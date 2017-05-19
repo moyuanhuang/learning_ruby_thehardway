@@ -4,13 +4,18 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
-    @post.save
-
-    redirect_to @post
+    if @post.save
+      redirect_to @post
+    else
+      # if the save failed, I won't loss all the things i wrote in
+      # the body and title using **render**
+      render 'new'
+    end
   end
 
   def show
