@@ -1,0 +1,7 @@
+= image_tag @recipe.image.url(:medium, class: "recipe_image")
+%h1= @recipe.title
+%p= @recipe.description
+
+= link_to "Back", root_path, class: "btn btn-default"
+= link_to "Edit", edit_recipe_path, class: "btn btn-default"
+= link_to "delete", recipe_path, method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-default"
